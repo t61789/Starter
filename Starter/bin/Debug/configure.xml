@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <pre-commands>
+    <command>
+      <name>shutdown</name>
+      <value></value>
+    </command>
+    <command>
+      <name>shutdown 5h</name>
+      <value></value>
+    </command>
+    <command>
+      <name>start C:\Users\HASEE\Desktop\Games\desktop.ini</name>
+      <value>C:\Users\HASEE\Desktop\Games\desktop.ini</value>
+    </command>
+  </pre-commands>
+  <predefine-commands>
+    <command>
+      <name>changeip reset</name>
+      <value></value>
+    </command>
+    <command>
+      <name>changeip static</name>
+      <value></value>
+    </command>
+    <command>
+      <name>shutdown</name>
+      <value></value>
+    </command>
+  </predefine-commands>
+  <directories>
+    <directory>C:\Users\HASEE\Desktop\Games</directory>
+    <directory>C:\Users\HASEE\Desktop\Programs</directory>
+  </directories>
+  <ipconfig>
+    <address>10.101.232.146</address>
+    <mask>255.255.255.0</mask>
+    <gateway>10.101.232.1</gateway>
+  </ipconfig>
+</root>
