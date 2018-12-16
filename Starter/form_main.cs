@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
@@ -16,13 +9,10 @@ namespace Starter
     public partial class form_main : Form
     {
         public CommandProcesser processer;
-
         public CommandSelector selector;
-
         public ConfigManager configManager;
-
+        public CommandInput input;
         public static form_main mainForm;
-
         public XDocument config;
 
         public form_main()
@@ -78,9 +68,10 @@ namespace Starter
 
             public bool PreFilterMessage(ref Message m)
             {
-                if (m.Msg == 0x0400)
+                if (m.Msg == 0x0400 && m.WParam == (IntPtr)0 && m.LParam == (IntPtr)0)
                 {
                     f.Visible = true;
+                    return true;
                 }
                 return false;
             }
@@ -92,6 +83,7 @@ namespace Starter
             configManager = new ConfigManager();
             processer = new CommandProcesser();
             selector = new CommandSelector(list_commands);
+            input = new CommandInput(text_console, list_commands);
         }
 
         private void button_confirm_Click(object sender, EventArgs e)
@@ -101,25 +93,12 @@ namespace Starter
 
         private void text_console_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && text_console.Focused)
-                processer.Process(text_console.Text);
-
-            if (list_commands.Items.Count != 0 && (e.KeyCode == Keys.Down || e.KeyCode == Keys.ControlKey))
-            {
-                if (!list_commands.Focused)
-                {
-                    list_commands.Focus();
-                    list_commands.Items[0].Selected = true;
-                }
-            }
-
-            if (e.KeyCode == Keys.Escape)
-                Visible = false;
+            input.KeyDown(sender, e);
         }
 
         private void text_console_TextChanged(object sender, EventArgs e)
         {
-            selector.CommandChange(text_console.Text);
+            input.TextChange(sender,e);
         }
 
         private void menuItem_addDirectory_Click(object sender, EventArgs e)
@@ -137,7 +116,7 @@ namespace Starter
                     text_console.Text = "start " + list_commands.SelectedItems[0].SubItems[1].Text;
                 else
                     text_console.Text = list_commands.SelectedItems[0].SubItems[0].Text;
-                processer.Process(text_console.Text);
+                form_main.mainForm.processer.Process(text_console.Text);
             }
             else if (e.KeyCode != Keys.Up && e.KeyCode != Keys.Down)
             {

@@ -15,3 +15,4 @@ E:\Programming\Git\Starter\Starter\obj\Release\Starter.Properties.Resources.reso
 E:\Programming\Git\Starter\Starter\obj\Release\Starter.csproj.GenerateResource.Cache
 E:\Programming\Git\Starter\Starter\obj\Release\Starter.exe
 E:\Programming\Git\Starter\Starter\obj\Release\Starter.pdb
+E:\Programming\Git\Starter\Starter\obj\Release\Starter.csprojResolveAssemblyReference.cache

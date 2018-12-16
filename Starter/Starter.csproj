@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="CommandProcesser.cs" />
     <Compile Include="CommandSelector.cs" />
+    <Compile Include="CommandInput.cs" />
     <Compile Include="ConfigManager.cs" />
     <Compile Include="form_main.cs">
       <SubType>Form</SubType>
