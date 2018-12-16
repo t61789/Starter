@@ -11,19 +11,7 @@ namespace Starter
     {
         private string command = "";
 
-        private form_main target;
-
         private XDocument doc;
-
-        public CommandProcesser()
-        {
-
-        }
-
-        public CommandProcesser(form_main target)
-        {
-            this.target = target;
-        }
 
         public void Process(string command)
         {
@@ -55,21 +43,21 @@ namespace Starter
             string filePath = GetCommandParameter(command);
             if (!File.Exists(filePath))
             {
-                target.ShowMessage("\"" + command + "\" 执行失败");
+                form_main.mainForm.ShowMessage("\"" + command + "\" 执行失败");
                 return;
             }
 
-            RecordCommand("start " + Path.GetFileNameWithoutExtension(filePath), filePath);
+            form_main.mainForm.configManager.RecordCommand("start " + Path.GetFileNameWithoutExtension(filePath), filePath);
 
             string cmdCommand = "start \"\" \"" + filePath + "\"";
 
             CmdProcess(cmdCommand);
 
-            target.ShowMessage("\"" + command + "\" 执行成功");
+            form_main.mainForm.ShowMessage("\"" + command + "\" 执行成功");
 
-            target.ClearCommand();
+            form_main.mainForm.ClearCommand();
 
-            target.SetVisible(false);
+            form_main.mainForm.SetVisible(false);
         }
 
         private void Shutdown()
@@ -101,13 +89,13 @@ namespace Starter
             }
             else
             {
-                target.ShowMessage("\"" + command + "\" 执行失败");
+                form_main.mainForm.ShowMessage("\"" + command + "\" 执行失败");
                 return;
             }
 
-            target.ShowMessage("\"" + command + "\" 执行成功");
-            RecordCommand(command, "");
-            target.ClearCommand();
+            form_main.mainForm.ShowMessage("\"" + command + "\" 执行成功");
+            form_main.mainForm.configManager.RecordCommand(command, "");
+            form_main.mainForm.ClearCommand();
         }
 
         private void ChangeIP()
@@ -128,14 +116,14 @@ namespace Starter
             }
             else
             {
-                target.ShowMessage("\"" + command + "\" 执行失败");
+                form_main.mainForm.ShowMessage("\"" + command + "\" 执行失败");
                 return;
             }
 
-            RecordCommand(command, "");
+            form_main.mainForm.configManager.RecordCommand(command, "");
             CmdProcess(cmdCommand);
-            target.ShowMessage("\"" + command + "\" 执行成功");
-            target.ClearCommand();
+            form_main.mainForm.ShowMessage("\"" + command + "\" 执行成功");
+            form_main.mainForm.ClearCommand();
         }
 
         private void CmdProcess(string command)
@@ -158,25 +146,6 @@ namespace Starter
             foreach (var temp in e.Elements())
                 i++;
             return i;
-        }
-
-        private void RecordCommand(string name, string value)
-        {
-            if (doc == null)
-                doc = XDocument.Load(Application.StartupPath + "\\configure.xml");
-
-            foreach(XElement temp in doc.Root.Element("pre-commands").Elements())
-                if (temp.Value == name && temp.Value == value)
-                    temp.Remove();
-
-            XElement newPreCommand = new XElement("command");
-            newPreCommand.Add(new XElement("name", name));
-            newPreCommand.Add(new XElement("value", value));
-            doc.Root.Element("pre-commands").AddFirst(newPreCommand);
-
-            if (XElementCount(doc.Root.Element("pre-commands")) > int.Parse(doc.Root.Element("record-number").Value))
-                doc.Root.Element("pre-commands").LastNode.Remove();
-            doc.Save(Application.StartupPath + "\\configure.xml");
         }
 
         private string GetCommandType(string command)

@@ -265,13 +265,13 @@
     <value>17, 17</value>
   </metadata>
   <data name="menuItem_addDirectory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 26</value>
+    <value>174, 26</value>
   </data>
   <data name="menuItem_addDirectory.Text" xml:space="preserve">
     <value>添加目录</value>
   </data>
   <data name="更新目录文件ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 26</value>
+    <value>174, 26</value>
   </data>
   <data name="更新目录文件ToolStripMenuItem.Text" xml:space="preserve">
     <value>更新目录文件</value>
@@ -1507,6 +1507,12 @@
   <data name="&gt;&gt;menuItem_addDirectory.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;更新目录文件ToolStripMenuItem.Name" xml:space="preserve">
+    <value>更新目录文件ToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;更新目录文件ToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;notifyIcon_main.Name" xml:space="preserve">
     <value>notifyIcon_main</value>
   </data>
@@ -1523,12 +1529,6 @@
     <value>stripMenuItem_close</value>
   </data>
   <data name="&gt;&gt;stripMenuItem_close.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;更新目录文件ToolStripMenuItem.Name" xml:space="preserve">
-    <value>更新目录文件ToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;更新目录文件ToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

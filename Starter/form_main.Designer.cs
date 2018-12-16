@@ -40,11 +40,11 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItem_addDirectory = new System.Windows.Forms.ToolStripMenuItem();
+            this.更新目录文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon_main = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip_notify = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.stripMenuItem_show = new System.Windows.Forms.ToolStripMenuItem();
             this.stripMenuItem_close = new System.Windows.Forms.ToolStripMenuItem();
-            this.更新目录文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel_input.SuspendLayout();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -120,6 +120,11 @@
             resources.ApplyResources(this.menuItem_addDirectory, "menuItem_addDirectory");
             this.menuItem_addDirectory.Click += new System.EventHandler(this.menuItem_addDirectory_Click);
             // 
+            // 更新目录文件ToolStripMenuItem
+            // 
+            this.更新目录文件ToolStripMenuItem.Name = "更新目录文件ToolStripMenuItem";
+            resources.ApplyResources(this.更新目录文件ToolStripMenuItem, "更新目录文件ToolStripMenuItem");
+            // 
             // notifyIcon_main
             // 
             this.notifyIcon_main.ContextMenuStrip = this.contextMenuStrip_notify;
@@ -147,11 +152,6 @@
             resources.ApplyResources(this.stripMenuItem_close, "stripMenuItem_close");
             this.stripMenuItem_close.Click += new System.EventHandler(this.stripMenuItem_close_Click);
             // 
-            // 更新目录文件ToolStripMenuItem
-            // 
-            this.更新目录文件ToolStripMenuItem.Name = "更新目录文件ToolStripMenuItem";
-            resources.ApplyResources(this.更新目录文件ToolStripMenuItem, "更新目录文件ToolStripMenuItem");
-            // 
             // form_main
             // 
             resources.ApplyResources(this, "$this");
@@ -162,6 +162,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "form_main";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.form_main_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.form_main_FormClosed);
             this.panel_input.ResumeLayout(false);
             this.panel_input.PerformLayout();
             this.panel1.ResumeLayout(false);

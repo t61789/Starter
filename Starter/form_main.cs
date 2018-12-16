@@ -2,32 +2,95 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Starter
 {
     public partial class form_main : Form
     {
-        private CommandProcesser processer;
+        public CommandProcesser processer;
 
-        private CommandSelector selector;
+        public CommandSelector selector;
 
-        private static form_main mainForm;
+        public ConfigManager configManager;
+
+        public static form_main mainForm;
+
+        public XDocument config;
 
         public form_main()
         {
+            DetecteDuplicate();
             InitializeComponent();
             Initialize();
+        }
+
+        public void ClearCommand()
+        {
+            text_console.Text = "";
+        }
+
+        public void RefreshCommand()
+        {
+            selector.CommandChange(text_console.Text);
+        }
+
+        public void ShowMessage(string message)
+        {
+            Text = "Starter\\" + message;
+        }
+
+        public void SetVisible(bool arg)
+        {
+            Visible = arg;
+        }
+
+        private void DetecteDuplicate()
+        {
+            Application.AddMessageFilter(new MsgFilter(this));
+            foreach (Process temp in Process.GetProcessesByName("Starter"))
+                if (temp.Id != Process.GetCurrentProcess().Id)
+                {
+                    PostThreadMessage(temp.Threads[0].Id, 0x0400, (IntPtr)0, (IntPtr)0);
+                    Environment.Exit(0);
+                }
+        }
+
+        [return: MarshalAs(UnmanagedType.Bool)]
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern bool PostThreadMessage(int threadId, uint msg, IntPtr wParam, IntPtr lParam);
+
+        private class MsgFilter : IMessageFilter
+        {
+            private form_main f;
+
+            public MsgFilter(form_main f)
+            {
+                this.f = f;
+            }
+
+            public bool PreFilterMessage(ref Message m)
+            {
+                if (m.Msg == 0x0400)
+                {
+                    f.Visible = true;
+                }
+                return false;
+            }
         }
 
         private void Initialize()
         {
             mainForm = this;
-            processer = new CommandProcesser(this);
+            configManager = new ConfigManager();
+            processer = new CommandProcesser();
             selector = new CommandSelector(list_commands);
         }
 
@@ -63,7 +126,7 @@ namespace Starter
         {
             FolderBrowserDialog folder = new FolderBrowserDialog();
             folder.ShowDialog();
-            selector.AddDirectory(folder.SelectedPath);
+            configManager.AddDirectory(folder.SelectedPath);
         }
 
         private void list_commands_KeyDown(object sender, KeyEventArgs e)
@@ -80,16 +143,6 @@ namespace Starter
             {
                 text_console.Focus();
             }
-        }
-
-        public void ClearCommand()
-        {
-            text_console.Text = "";
-        }
-
-        public void ShowMessage(string message)
-        {
-            Text = "Starter\\" + message;
         }
 
         private void form_main_FormClosing(object sender, FormClosingEventArgs e)
@@ -111,14 +164,14 @@ namespace Starter
             Application.Exit();
         }
 
-        public void SetVisible(bool arg)
-        {
-            Visible = arg;
-        }
-
         private void notifyIcon_main_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Visible = Visible ? false : true;
+        }
+
+        private void form_main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            configManager.Save();
         }
     }
 }

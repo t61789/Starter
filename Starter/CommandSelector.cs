@@ -11,20 +11,7 @@ namespace Starter
 {
     public class CommandSelector
     {
-        private XDocument doc;
-
         private ListView target;
-
-        private List<string[]> commands = new List<string[]>();
-
-        private List<string> directories = new List<string>();
-
-        private string configurePath = Application.StartupPath + "\\configure.xml";
-
-        public CommandSelector()
-        {
-
-        }
 
         public CommandSelector(ListView listview)
         {
@@ -34,60 +21,44 @@ namespace Starter
 
         public void Initialize()
         {
-            if (!File.Exists(configurePath))
-            {
-                CreateConfigureFile();
-                return;
-            }
-            target.Items.Clear();
-
-            commands = new List<string[]>();
-
-            doc = XDocument.Load(Application.StartupPath + "\\configure.xml");
-
-            foreach (XElement temp in doc.Root.Element("predefine-commands").Elements())
-                commands.Add(new string[] { temp.Element("name").Value, temp.Element("value").Value });
-
-            foreach (string directory in doc.Root.Element("directories").Elements())
-                foreach (string temp in GetAllFile(directory))
-                    commands.Add(new string[] { "start " + Path.GetFileNameWithoutExtension(temp), temp });
-
             CommandChange("");
-        }
-
-        private string[] GetAllFile(string path)
-        {
-            List<string> files = new List<string>();
-
-            if (!Directory.Exists(path))
-                return files.ToArray();
-
-            files.AddRange(Directory.GetFiles(path));
-
-            foreach (string temp in Directory.GetDirectories(path))
-                files.AddRange(GetAllFile(temp));
-
-            return files.ToArray();
         }
 
         public void CommandChange(string command)
         {
             List<string[]> tableList = new List<string[]>();
 
-            if (command == "")
-                tableList.AddRange(GetPreCommands());
-
-                string pattern = @".*";
+            string pattern = @".*";
             foreach (char temp in command)
                 pattern += temp + @".*";
 
-            foreach (string[] temp in commands)
-                if (Regex.Match(temp[0], pattern, RegexOptions.IgnoreCase).Value == temp[0])
-                    tableList.Add(temp);
-            pattern = @"[" + command + @"]";
+            foreach (XElement temp in form_main.mainForm.config.Root.Element("commands").Elements())
+                if (Regex.Match(temp.Element("name").Value, pattern, RegexOptions.IgnoreCase).Value == temp.Element("name").Value)
+                    tableList.Add(new string[] { temp.Element("name").Value, temp.Element("value").Value });
+            
+            if (command == "")
+                pattern = @".*";
+            else
+                pattern = @"[" + command + @"]";
+            tableList.Sort((left, right) =>
+            {
+                XNode leftE = IsPreCommand(left[0], left[1]);
+                XNode rightE = IsPreCommand(right[0], right[1]);
 
-            if (command != "")
-                tableList.Sort((left, right) =>
+                if (leftE != null && rightE == null)
+                    return -1;
+                else if (leftE == null && rightE != null)
+                    return 1;
+                else if (leftE != null && rightE != null)
+                {
+                    while(leftE.NextNode!=null)
+                        if (leftE.NextNode == rightE)
+                            return -1;
+                        else
+                            leftE = leftE.NextNode;
+                    return 1;
+                }
+                else
                 {
                     int leftL = Regex.Replace(left[0], pattern, "", RegexOptions.IgnoreCase).Length;
                     int rightL = Regex.Replace(right[0], pattern, "", RegexOptions.IgnoreCase).Length;
@@ -98,46 +69,20 @@ namespace Starter
                         return -1;
                     else
                         return 0;
-                });
+                }
+            });
 
             target.Items.Clear();
             foreach (string[] temp in tableList)
                 target.Items.Add(new ListViewItem(temp));
         }
 
-        public void CreateConfigureFile()
+        private XElement IsPreCommand(string name, string value)
         {
-            XDocument newDoc = new XDocument();
-            newDoc.Add(new XElement("root"));
-            newDoc.Root.Add(new XElement("pre-commands"));
-            newDoc.Root.Add(new XElement("predefine-commands"));
-            newDoc.Root.Add(new XElement("directories"));
-            XElement ipconfig = new XElement("ipconfig");
-            ipconfig.Add(new XElement("address","0.0.0.0"));
-            ipconfig.Add(new XElement("mask", "0.0.0.0"));
-            ipconfig.Add(new XElement("gateway", "0.0.0.0"));
-            newDoc.Root.Add(new XElement("record-number"));
-            newDoc.Root.Add(ipconfig);
-
-            newDoc.Save(configurePath);
-            Initialize();
-        }
-
-        private List<string[]> GetPreCommands()
-        {
-            List<string[]> result = new List<string[]>();
-            doc = XDocument.Load(configurePath);
-            foreach (XElement temp in doc.Root.Element("pre-commands").Elements())
-                result.Add(new string[] { temp.Element("name").Value, temp.Element("value").Value });
-
-            return result;
-        }
-
-        public void AddDirectory(string path)
-        {
-            doc.Root.Element("directories").Add(new XElement("directory",path));
-            doc.Save(configurePath);
-            Initialize();
+            foreach (XElement temp in form_main.mainForm.config.Root.Element("pre-commands").Elements())
+                if (temp.Element("name").Value == name && temp.Element("value").Value == value)
+                    return temp;
+            return null;
         }
     }
 }

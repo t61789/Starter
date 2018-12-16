@@ -8,5 +8,10 @@ E:\Programming\C_C++_C#\Starter\Starter\obj\Release\Starter.exe
 E:\Programming\C_C++_C#\Starter\Starter\obj\Release\Starter.pdb
 E:\Programming\C_C++_C#\Starter\Starter\obj\Release\Starter.csprojResolveAssemblyReference.cache
 E:\Programming\Git\Starter\Starter\bin\Release\Starter.exe.config
+E:\Programming\Git\Starter\Starter\bin\Release\Starter.exe
+E:\Programming\Git\Starter\Starter\bin\Release\Starter.pdb
+E:\Programming\Git\Starter\Starter\obj\Release\Starter.form_main.resources
+E:\Programming\Git\Starter\Starter\obj\Release\Starter.Properties.Resources.resources
+E:\Programming\Git\Starter\Starter\obj\Release\Starter.csproj.GenerateResource.Cache
 E:\Programming\Git\Starter\Starter\obj\Release\Starter.exe
 E:\Programming\Git\Starter\Starter\obj\Release\Starter.pdb
