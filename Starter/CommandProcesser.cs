@@ -69,7 +69,7 @@ namespace Starter
 
             target.ClearCommand();
 
-            Application.Exit();
+            target.SetVisible(false);
         }
 
         private void Shutdown()

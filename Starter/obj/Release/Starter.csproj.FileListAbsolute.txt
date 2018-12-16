@@ -7,3 +7,6 @@ E:\Programming\C_C++_C#\Starter\Starter\obj\Release\Starter.csproj.GenerateResou
 E:\Programming\C_C++_C#\Starter\Starter\obj\Release\Starter.exe
 E:\Programming\C_C++_C#\Starter\Starter\obj\Release\Starter.pdb
 E:\Programming\C_C++_C#\Starter\Starter\obj\Release\Starter.csprojResolveAssemblyReference.cache
+E:\Programming\Git\Starter\Starter\bin\Release\Starter.exe.config
+E:\Programming\Git\Starter\Starter\obj\Release\Starter.exe
+E:\Programming\Git\Starter\Starter\obj\Release\Starter.pdb

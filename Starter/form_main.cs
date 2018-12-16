@@ -16,6 +16,8 @@ namespace Starter
 
         private CommandSelector selector;
 
+        private static form_main mainForm;
+
         public form_main()
         {
             InitializeComponent();
@@ -24,6 +26,7 @@ namespace Starter
 
         private void Initialize()
         {
+            mainForm = this;
             processer = new CommandProcesser(this);
             selector = new CommandSelector(list_commands);
         }
@@ -38,7 +41,7 @@ namespace Starter
             if (e.KeyCode == Keys.Enter && text_console.Focused)
                 processer.Process(text_console.Text);
 
-            if (list_commands.Items.Count != 0 && (e.KeyCode == Keys.Down|| e.KeyCode == Keys.ControlKey))
+            if (list_commands.Items.Count != 0 && (e.KeyCode == Keys.Down || e.KeyCode == Keys.ControlKey))
             {
                 if (!list_commands.Focused)
                 {
@@ -48,7 +51,7 @@ namespace Starter
             }
 
             if (e.KeyCode == Keys.Escape)
-                Application.Exit();
+                Visible = false;
         }
 
         private void text_console_TextChanged(object sender, EventArgs e)
@@ -73,7 +76,7 @@ namespace Starter
                     text_console.Text = list_commands.SelectedItems[0].SubItems[0].Text;
                 processer.Process(text_console.Text);
             }
-            else if(e.KeyCode!=Keys.Up&&e.KeyCode!=Keys.Down)
+            else if (e.KeyCode != Keys.Up && e.KeyCode != Keys.Down)
             {
                 text_console.Focus();
             }
@@ -87,6 +90,35 @@ namespace Starter
         public void ShowMessage(string message)
         {
             Text = "Starter\\" + message;
+        }
+
+        private void form_main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Visible = false;
+            }
+        }
+
+        private void stripMenuItem_show_Click(object sender, EventArgs e)
+        {
+            Visible = true;
+        }
+
+        private void stripMenuItem_close_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        public void SetVisible(bool arg)
+        {
+            Visible = arg;
+        }
+
+        private void notifyIcon_main_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Visible = Visible ? false : true;
         }
     }
 }

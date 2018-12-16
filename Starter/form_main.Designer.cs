@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(form_main));
             this.text_console = new System.Windows.Forms.TextBox();
             this.button_confirm = new System.Windows.Forms.Button();
@@ -39,9 +40,15 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItem_addDirectory = new System.Windows.Forms.ToolStripMenuItem();
+            this.notifyIcon_main = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip_notify = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.stripMenuItem_show = new System.Windows.Forms.ToolStripMenuItem();
+            this.stripMenuItem_close = new System.Windows.Forms.ToolStripMenuItem();
+            this.更新目录文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel_input.SuspendLayout();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.contextMenuStrip_notify.SuspendLayout();
             this.SuspendLayout();
             // 
             // text_console
@@ -102,7 +109,8 @@
             // 文件ToolStripMenuItem
             // 
             this.文件ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItem_addDirectory});
+            this.menuItem_addDirectory,
+            this.更新目录文件ToolStripMenuItem});
             this.文件ToolStripMenuItem.Name = "文件ToolStripMenuItem";
             resources.ApplyResources(this.文件ToolStripMenuItem, "文件ToolStripMenuItem");
             // 
@@ -111,6 +119,38 @@
             this.menuItem_addDirectory.Name = "menuItem_addDirectory";
             resources.ApplyResources(this.menuItem_addDirectory, "menuItem_addDirectory");
             this.menuItem_addDirectory.Click += new System.EventHandler(this.menuItem_addDirectory_Click);
+            // 
+            // notifyIcon_main
+            // 
+            this.notifyIcon_main.ContextMenuStrip = this.contextMenuStrip_notify;
+            resources.ApplyResources(this.notifyIcon_main, "notifyIcon_main");
+            this.notifyIcon_main.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_main_MouseDoubleClick);
+            // 
+            // contextMenuStrip_notify
+            // 
+            this.contextMenuStrip_notify.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip_notify.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stripMenuItem_show,
+            this.stripMenuItem_close});
+            this.contextMenuStrip_notify.Name = "contextMenuStrip_notify";
+            resources.ApplyResources(this.contextMenuStrip_notify, "contextMenuStrip_notify");
+            // 
+            // stripMenuItem_show
+            // 
+            this.stripMenuItem_show.Name = "stripMenuItem_show";
+            resources.ApplyResources(this.stripMenuItem_show, "stripMenuItem_show");
+            this.stripMenuItem_show.Click += new System.EventHandler(this.stripMenuItem_show_Click);
+            // 
+            // stripMenuItem_close
+            // 
+            this.stripMenuItem_close.Name = "stripMenuItem_close";
+            resources.ApplyResources(this.stripMenuItem_close, "stripMenuItem_close");
+            this.stripMenuItem_close.Click += new System.EventHandler(this.stripMenuItem_close_Click);
+            // 
+            // 更新目录文件ToolStripMenuItem
+            // 
+            this.更新目录文件ToolStripMenuItem.Name = "更新目录文件ToolStripMenuItem";
+            resources.ApplyResources(this.更新目录文件ToolStripMenuItem, "更新目录文件ToolStripMenuItem");
             // 
             // form_main
             // 
@@ -121,11 +161,13 @@
             this.Controls.Add(this.panel_input);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "form_main";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.form_main_FormClosing);
             this.panel_input.ResumeLayout(false);
             this.panel_input.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.contextMenuStrip_notify.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -143,6 +185,11 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 文件ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuItem_addDirectory;
+        private System.Windows.Forms.NotifyIcon notifyIcon_main;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip_notify;
+        private System.Windows.Forms.ToolStripMenuItem stripMenuItem_close;
+        private System.Windows.Forms.ToolStripMenuItem stripMenuItem_show;
+        private System.Windows.Forms.ToolStripMenuItem 更新目录文件ToolStripMenuItem;
     }
 }
 
