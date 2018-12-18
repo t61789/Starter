@@ -85,6 +85,7 @@
             this.column_command,
             this.column_value});
             this.list_commands.FullRowSelect = true;
+            this.list_commands.MultiSelect = false;
             this.list_commands.Name = "list_commands";
             this.list_commands.UseCompatibleStateImageBehavior = false;
             this.list_commands.View = System.Windows.Forms.View.Details;
@@ -163,6 +164,8 @@
             this.Name = "form_main";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.form_main_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.form_main_FormClosed);
+            this.Shown += new System.EventHandler(this.form_main_Shown);
+            this.Enter += new System.EventHandler(this.form_main_Enter);
             this.panel_input.ResumeLayout(false);
             this.panel_input.PerformLayout();
             this.panel1.ResumeLayout(false);

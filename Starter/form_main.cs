@@ -98,7 +98,7 @@ namespace Starter
 
         private void text_console_TextChanged(object sender, EventArgs e)
         {
-            input.TextChange(sender,e);
+            input.TextChange(sender, e);
         }
 
         private void menuItem_addDirectory_Click(object sender, EventArgs e)
@@ -108,6 +108,9 @@ namespace Starter
             configManager.AddDirectory(folder.SelectedPath);
         }
 
+        [DllImport("user32.dll")]
+        public static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
+
         private void list_commands_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter && list_commands.SelectedItems.Count != 0)
@@ -116,19 +119,16 @@ namespace Starter
                     text_console.Text = "start " + list_commands.SelectedItems[0].SubItems[1].Text;
                 else
                     text_console.Text = list_commands.SelectedItems[0].SubItems[0].Text;
-                form_main.mainForm.processer.Process(text_console.Text);
+                processer.Process(text_console.Text);
             }
-            else if (e.KeyCode != Keys.Up && e.KeyCode != Keys.Down)
+            else if (e.KeyCode != Keys.Up && e.KeyCode != Keys.Down && e.KeyCode != Keys.Control)
             {
                 text_console.Focus();
+                keybd_event((byte)e.KeyCode, 0,0,0);
             }
-        }
-
-        private void form_main_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing)
+            else if (e.KeyCode == Keys.Escape)
             {
-                e.Cancel = true;
+                text_console.Text = "";
                 Visible = false;
             }
         }
@@ -148,9 +148,28 @@ namespace Starter
             Visible = Visible ? false : true;
         }
 
+        private void form_main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Visible = false;
+            }
+        }
+
         private void form_main_FormClosed(object sender, FormClosedEventArgs e)
         {
             configManager.Save();
+        }
+
+        private void form_main_Shown(object sender, EventArgs e)
+        {
+            text_console.Focus();
+        }
+
+        private void form_main_Enter(object sender, EventArgs e)
+        {
+            text_console.Focus();
         }
     }
 }
