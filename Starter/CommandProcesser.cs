@@ -47,7 +47,7 @@ namespace Starter
                 return;
             }
 
-            form_main.mainForm.configManager.RecordCommand("start " + Path.GetFileNameWithoutExtension(filePath), filePath);
+            form_main.mainForm.configManager.RecordCommand(new Command("start " + Path.GetFileNameWithoutExtension(filePath), filePath));
 
             string cmdCommand = "start \"\" \"" + filePath + "\"";
 
@@ -94,7 +94,7 @@ namespace Starter
             }
 
             form_main.mainForm.ShowMessage("\"" + command + "\" 执行成功");
-            form_main.mainForm.configManager.RecordCommand(command, "");
+            form_main.mainForm.configManager.RecordCommand(new Command(command, ""));
             form_main.mainForm.ClearCommand();
         }
 
@@ -120,13 +120,13 @@ namespace Starter
                 return;
             }
 
-            form_main.mainForm.configManager.RecordCommand(command, "");
+            form_main.mainForm.configManager.RecordCommand(new Command(command, ""));
             CmdProcess(cmdCommand);
             form_main.mainForm.ShowMessage("\"" + command + "\" 执行成功");
             form_main.mainForm.ClearCommand();
         }
 
-        private void CmdProcess(string command)
+        public void CmdProcess(string command)
         {
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";

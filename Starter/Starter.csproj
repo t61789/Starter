@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command.cs" />
     <Compile Include="CommandProcesser.cs" />
     <Compile Include="CommandSelector.cs" />
     <Compile Include="CommandInput.cs" />

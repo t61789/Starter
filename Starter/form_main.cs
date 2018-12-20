@@ -29,7 +29,8 @@ namespace Starter
 
         public void RefreshCommand()
         {
-            selector.CommandChange(text_console.Text);
+            if(selector != null)
+                selector.CommandChange(text_console.Text);
         }
 
         public void ShowMessage(string message)
@@ -108,6 +109,16 @@ namespace Starter
             configManager.AddDirectory(folder.SelectedPath);
         }
 
+        private void menuItem_openConfig_Click(object sender, EventArgs e)
+        {
+            configManager.OpenConfig();
+        }
+
+        private void menuItem_reloadConfig_Click(object sender, EventArgs e)
+        {
+            configManager.ReloadConfig();
+        }
+
         [DllImport("user32.dll")]
         public static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
 
@@ -124,7 +135,7 @@ namespace Starter
             else if (e.KeyCode != Keys.Up && e.KeyCode != Keys.Down && e.KeyCode != Keys.Control)
             {
                 text_console.Focus();
-                keybd_event((byte)e.KeyCode, 0,0,0);
+                keybd_event((byte)e.KeyCode, 0, 0, 0);
             }
             else if (e.KeyCode == Keys.Escape)
             {

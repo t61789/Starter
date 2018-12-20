@@ -33,91 +33,66 @@ namespace Starter
             doc.Save(configPath);
         }
 
-        public void RecordCommand(string name, string value)
+        public void RecordCommand(Command command)
         {
-            foreach (XElement temp in doc.Root.Element("pre-commands").Elements())
-                if (temp.Element("name").Value == name && temp.Element("value").Value == value)
+            XElement newPreCommand = new XElement("command");
+            newPreCommand.Add(new XElement("name", command.Name));
+            newPreCommand.Add(new XElement("param", command.Param));
+            newPreCommand.Add(new XElement("date", DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-ffff")));
+            XElement curNode;
+
+            if (command.Type == "start")
+            {
+                curNode = doc.Root.Element("pre-commands").Element("start");
+                foreach (XElement temp in curNode.Elements().Where(x => CommandEquals(x, command)))
+                    temp.Remove();//若已在已使用命令中存在，则移除它
+
+                curNode.Add(newPreCommand);
+            }
+            else
+            {
+                curNode = doc.Root.Element("pre-commands").Element("default");
+                foreach (XElement temp in curNode.Elements().Where(x => CommandEquals(x, command)))
                     temp.Remove();
 
-            XElement command = new XElement("command");
-            command.Add(new XElement("name", name));
-            command.Add(new XElement("value", value));
-            doc.Root.Element("pre-commands").AddFirst(command);
+                curNode.Add(newPreCommand);
 
-            int recordNumber = doc.Root.Element("record-number").Value == "" ? 0 : int.Parse(doc.Root.Element("record-number").Value);
-            int childNumber = ChildNumber(doc.Root.Element("pre-commands"));
-            if (childNumber > recordNumber)
-                for(int i = 0; i <childNumber-recordNumber; i++)
-                    doc.Root.Element("pre-commands").LastNode.Remove();
+                int recordNumber = doc.Root.Element("record-number").Value == "" ? 0 : int.Parse(doc.Root.Element("record-number").Value);
+                int childNumber = ChildNumber(curNode);
+                if (childNumber > recordNumber)
+                    for (int i = 0; i < childNumber - recordNumber; i++)
+                        curNode.LastNode.Remove();//如果已使用命令大于上限，删除多出的命令
+            }
+        }
 
-            foreach (XElement temp in doc.Root.Element("commands").Elements())
-                if (temp.Element("name").Value == name && temp.Element("value").Value == value)
-                    return;
-            doc.Root.Element("commands").Add(command);
+        private bool CommandEquals(XElement command, Command c)
+        {
+            return command.Element("name").Value == c.Name && command.Element("param").Value == c.Param;
         }
 
         public void AddDirectory(string path)
         {
             doc.Root.Element("directories").Add(new XElement("directory", path));
-            RefreshFileCommands();
-        }
-
-        public void RefreshFileCommands()
-        {
-            List<string> curfiles = new List<string>();
-            foreach (XElement temp in doc.Root.Element("directories").Elements())
-                curfiles.AddRange(GetAllFiles(temp.Value));
-            foreach (XElement temp in doc.Root.Element("commands").Elements())
-                if (GetCommandType(temp.Element("name").Value) == "start")
-                    if (curfiles.IndexOf(temp.Element("value").Value) == -1)
-                        temp.Remove();
-                    else
-                        curfiles.Remove(temp.Element("value").Value);
-            foreach (string temp in curfiles)
-            {
-                XElement command = new XElement("command");
-                command.Add(new XElement("name", "start " + Path.GetFileNameWithoutExtension(temp)));
-                command.Add(new XElement("value", temp));
-                doc.Root.Element("commands").Add(command);
-            }
-            form_main.mainForm.RefreshCommand();
-        }
-
-        private List<string> GetAllFiles(string path)
-        {
-            List<string> files = new List<string>();
-
-            if (!Directory.Exists(path))
-                return files;
-
-            files.AddRange(Directory.GetFiles(path));
-
-            foreach (string temp in Directory.GetDirectories(path))
-                files.AddRange(GetAllFiles(temp));
-
-            return files;
+            form_main.mainForm.selector.RefreshStartFiles();
         }
 
         private void CreateConfigFile()
         {
             doc = new XDocument();
             doc.Add(new XElement("root"));
-            doc.Root.Add(new XElement("commands"));
-            doc.Root.Add(new XElement("pre-commands"));
+            XElement temp = new XElement("pre-commands");
+            temp.Add(new XElement("default"));
+            temp.Add(new XElement("start"));
+            doc.Root.Add(temp);
             doc.Root.Add(new XElement("record-number"));
             doc.Root.Add(new XElement("directories"));
-            XElement ipconfig = new XElement("ipconfig");
-            ipconfig.Add(new XElement("address", "0.0.0.0"));
-            ipconfig.Add(new XElement("mask", "0.0.0.0"));
-            ipconfig.Add(new XElement("gateway", "0.0.0.0"));
-            doc.Root.Add(ipconfig);
+            temp = new XElement("ipconfig");
+            temp.Add(new XElement("address", "0.0.0.0"));
+            temp.Add(new XElement("mask", "0.0.0.0"));
+            temp.Add(new XElement("gateway", "0.0.0.0"));
+            doc.Root.Add(temp);
             doc.Save(configPath);
             form_main.mainForm.config = doc;
-        }
-
-        private string GetCommandType(string command)
-        {
-            return Regex.Match(command, @"^.+?( |$)").Value.Replace(" ", "");
         }
 
         private int ChildNumber(XElement e)
@@ -126,6 +101,24 @@ namespace Starter
             foreach (var temp in e.Elements())
                 i++;
             return i;
+        }
+
+        public void ReloadConfig()
+        {
+            XElement preCommands = doc.Root.Element("pre-commands");
+            doc = XDocument.Load(configPath);
+            doc.Root.Element("pre-commands").Remove();
+            doc.Root.Add(preCommands);
+            Save();
+            form_main.mainForm.RefreshCommand();
+        }
+
+        public void OpenConfig()
+        {
+            if (File.Exists(configPath))
+                form_main.mainForm.processer.CmdProcess("start \"\" \"" + configPath + "\"");
+            else
+                form_main.mainForm.ShowMessage("配置文件打开失败");
         }
     }
 }
