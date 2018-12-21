@@ -144,6 +144,11 @@ namespace Starter
             }
         }
 
+        private void list_commands_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            stripMenuItem_excecute_Click(null,null);
+        }
+
         private void stripMenuItem_show_Click(object sender, EventArgs e)
         {
             Visible = true;
@@ -180,6 +185,18 @@ namespace Starter
 
         private void form_main_Enter(object sender, EventArgs e)
         {
+            text_console.Focus();
+        }
+
+        private void stripMenuItem_excecute_Click(object sender, EventArgs e)
+        {
+            list_commands_KeyDown(null,new KeyEventArgs(Keys.Enter));
+        }
+
+        private void stripMenuItem_forbid_Click(object sender, EventArgs e)
+        {
+            if (list_commands.SelectedItems.Count != 0)
+                configManager.ForbidCommand(new Command(list_commands.SelectedItems[0].SubItems[0].Text, list_commands.SelectedItems[0].SubItems[1].Text));
             text_console.Focus();
         }
     }

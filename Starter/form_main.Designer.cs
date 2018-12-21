@@ -41,15 +41,19 @@
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItem_addDirectory = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItem_reloadConfig = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItem_openConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon_main = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip_notify = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.stripMenuItem_show = new System.Windows.Forms.ToolStripMenuItem();
             this.stripMenuItem_close = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItem_openConfig = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip_listItem = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.stripMenuItem_excecute = new System.Windows.Forms.ToolStripMenuItem();
+            this.stripMenuItem_forbid = new System.Windows.Forms.ToolStripMenuItem();
             this.panel_input.SuspendLayout();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip_notify.SuspendLayout();
+            this.contextMenuStrip_listItem.SuspendLayout();
             this.SuspendLayout();
             // 
             // text_console
@@ -85,12 +89,14 @@
             this.list_commands.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.column_command,
             this.column_value});
+            this.list_commands.ContextMenuStrip = this.contextMenuStrip_listItem;
             this.list_commands.FullRowSelect = true;
             this.list_commands.MultiSelect = false;
             this.list_commands.Name = "list_commands";
             this.list_commands.UseCompatibleStateImageBehavior = false;
             this.list_commands.View = System.Windows.Forms.View.Details;
             this.list_commands.KeyDown += new System.Windows.Forms.KeyEventHandler(this.list_commands_KeyDown);
+            this.list_commands.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.list_commands_MouseDoubleClick);
             // 
             // column_command
             // 
@@ -129,6 +135,12 @@
             resources.ApplyResources(this.menuItem_reloadConfig, "menuItem_reloadConfig");
             this.menuItem_reloadConfig.Click += new System.EventHandler(this.menuItem_reloadConfig_Click);
             // 
+            // menuItem_openConfig
+            // 
+            this.menuItem_openConfig.Name = "menuItem_openConfig";
+            resources.ApplyResources(this.menuItem_openConfig, "menuItem_openConfig");
+            this.menuItem_openConfig.Click += new System.EventHandler(this.menuItem_openConfig_Click);
+            // 
             // notifyIcon_main
             // 
             this.notifyIcon_main.ContextMenuStrip = this.contextMenuStrip_notify;
@@ -156,11 +168,26 @@
             resources.ApplyResources(this.stripMenuItem_close, "stripMenuItem_close");
             this.stripMenuItem_close.Click += new System.EventHandler(this.stripMenuItem_close_Click);
             // 
-            // menuItem_openConfig
+            // contextMenuStrip_listItem
             // 
-            this.menuItem_openConfig.Name = "menuItem_openConfig";
-            resources.ApplyResources(this.menuItem_openConfig, "menuItem_openConfig");
-            this.menuItem_openConfig.Click += new System.EventHandler(this.menuItem_openConfig_Click);
+            this.contextMenuStrip_listItem.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip_listItem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stripMenuItem_excecute,
+            this.stripMenuItem_forbid});
+            this.contextMenuStrip_listItem.Name = "contextMenuStrip_listItem";
+            resources.ApplyResources(this.contextMenuStrip_listItem, "contextMenuStrip_listItem");
+            // 
+            // stripMenuItem_excecute
+            // 
+            this.stripMenuItem_excecute.Name = "stripMenuItem_excecute";
+            resources.ApplyResources(this.stripMenuItem_excecute, "stripMenuItem_excecute");
+            this.stripMenuItem_excecute.Click += new System.EventHandler(this.stripMenuItem_excecute_Click);
+            // 
+            // stripMenuItem_forbid
+            // 
+            this.stripMenuItem_forbid.Name = "stripMenuItem_forbid";
+            resources.ApplyResources(this.stripMenuItem_forbid, "stripMenuItem_forbid");
+            this.stripMenuItem_forbid.Click += new System.EventHandler(this.stripMenuItem_forbid_Click);
             // 
             // form_main
             // 
@@ -181,6 +208,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.contextMenuStrip_notify.ResumeLayout(false);
+            this.contextMenuStrip_listItem.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -204,6 +232,9 @@
         private System.Windows.Forms.ToolStripMenuItem stripMenuItem_show;
         private System.Windows.Forms.ToolStripMenuItem menuItem_reloadConfig;
         private System.Windows.Forms.ToolStripMenuItem menuItem_openConfig;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip_listItem;
+        private System.Windows.Forms.ToolStripMenuItem stripMenuItem_excecute;
+        private System.Windows.Forms.ToolStripMenuItem stripMenuItem_forbid;
     }
 }
 

@@ -43,14 +43,21 @@ namespace Starter
                         Command pre = new Command(temp.Element("name").Value, temp.Element("param").Value);
                         pre.Date = DateTime.ParseExact(temp.Element("date").Value,"yyyy-MM-dd-HH-mm-ss-ffff", System.Globalization.CultureInfo.CurrentCulture);
                         preCommands.Add(pre);
-                    }
+                    }//添加已使用命令
 
             selectedCommands.AddRange(preCommands);
             startCommands.ForEach(x=> 
             {
                 if (selectedCommands.IndexOf(x) == -1 && Regex.Match(x.Name, pattern, RegexOptions.IgnoreCase).Value == x.Name)
                     selectedCommands.Add(x);
-            });
+            });//不重复地添加启动命令
+
+            foreach(XElement temp in form_main.mainForm.config.Root.Element("forbid-commands").Elements())
+            {
+                Command temp1 = new Command(temp.Element("name").Value, temp.Element("param").Value);
+                if (selectedCommands.IndexOf(temp1) != -1)
+                    selectedCommands.Remove(temp1);
+            }//删除禁止的命令
 
             if (command == "")
                 pattern = @".*";

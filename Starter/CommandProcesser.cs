@@ -11,8 +11,6 @@ namespace Starter
     {
         private string command = "";
 
-        private XDocument doc;
-
         public void Process(string command)
         {
             this.command = Regex.Replace(command, @"^ *", "");

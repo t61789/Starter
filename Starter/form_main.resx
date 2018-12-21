@@ -196,13 +196,61 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel_input.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="panel1.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="list_commands.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="column_command.Text" xml:space="preserve">
+    <value>command</value>
+  </data>
+  <data name="column_command.Width" type="System.Int32, mscorlib">
+    <value>245</value>
+  </data>
+  <data name="column_value.Text" xml:space="preserve">
+    <value>value</value>
+  </data>
+  <data name="column_value.Width" type="System.Int32, mscorlib">
+    <value>645</value>
+  </data>
+  <metadata name="contextMenuStrip_listItem.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>572, 17</value>
+  </metadata>
+  <data name="stripMenuItem_excecute.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 24</value>
+  </data>
+  <data name="stripMenuItem_excecute.Text" xml:space="preserve">
+    <value>执行</value>
+  </data>
+  <data name="stripMenuItem_forbid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 24</value>
+  </data>
+  <data name="stripMenuItem_forbid.Text" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="contextMenuStrip_listItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 52</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip_listItem.Name" xml:space="preserve">
+    <value>contextMenuStrip_listItem</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip_listItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="list_commands.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 3</value>
+  </data>
+  <data name="list_commands.Size" type="System.Drawing.Size, System.Drawing">
+    <value>900, 458</value>
+  </data>
+  <data name="list_commands.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;list_commands.Name" xml:space="preserve">
     <value>list_commands</value>
@@ -235,71 +283,11 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="list_commands.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="list_commands.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 3</value>
-  </data>
-  <data name="list_commands.Size" type="System.Drawing.Size, System.Drawing">
-    <value>900, 458</value>
-  </data>
-  <data name="list_commands.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;list_commands.Name" xml:space="preserve">
-    <value>list_commands</value>
-  </data>
-  <data name="&gt;&gt;list_commands.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;list_commands.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;list_commands.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="column_command.Text" xml:space="preserve">
-    <value>command</value>
-  </data>
-  <data name="column_command.Width" type="System.Int32, mscorlib">
-    <value>245</value>
-  </data>
-  <data name="column_value.Text" xml:space="preserve">
-    <value>value</value>
-  </data>
-  <data name="column_value.Width" type="System.Int32, mscorlib">
-    <value>645</value>
+    <value>3</value>
   </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="menuItem_addDirectory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 26</value>
-  </data>
-  <data name="menuItem_addDirectory.Text" xml:space="preserve">
-    <value>添加目录</value>
-  </data>
-  <data name="menuItem_reloadConfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 26</value>
-  </data>
-  <data name="menuItem_reloadConfig.Text" xml:space="preserve">
-    <value>更新目录文件</value>
-  </data>
-  <data name="menuItem_openConfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 26</value>
-  </data>
-  <data name="menuItem_openConfig.Text" xml:space="preserve">
-    <value>打开配置文件</value>
-  </data>
-  <data name="文件ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 24</value>
-  </data>
-  <data name="文件ToolStripMenuItem.Text" xml:space="preserve">
-    <value>文件</value>
-  </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -322,7 +310,31 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
+  </data>
+  <data name="文件ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 24</value>
+  </data>
+  <data name="文件ToolStripMenuItem.Text" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="menuItem_addDirectory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 26</value>
+  </data>
+  <data name="menuItem_addDirectory.Text" xml:space="preserve">
+    <value>添加目录</value>
+  </data>
+  <data name="menuItem_reloadConfig.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 26</value>
+  </data>
+  <data name="menuItem_reloadConfig.Text" xml:space="preserve">
+    <value>更新目录文件</value>
+  </data>
+  <data name="menuItem_openConfig.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 26</value>
+  </data>
+  <data name="menuItem_openConfig.Text" xml:space="preserve">
+    <value>打开配置文件</value>
   </data>
   <metadata name="notifyIcon_main.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>159, 17</value>
@@ -1531,6 +1543,12 @@
   <data name="&gt;&gt;menuItem_reloadConfig.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;menuItem_openConfig.Name" xml:space="preserve">
+    <value>menuItem_openConfig</value>
+  </data>
+  <data name="&gt;&gt;menuItem_openConfig.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;notifyIcon_main.Name" xml:space="preserve">
     <value>notifyIcon_main</value>
   </data>
@@ -1549,10 +1567,16 @@
   <data name="&gt;&gt;stripMenuItem_close.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;menuItem_openConfig.Name" xml:space="preserve">
-    <value>menuItem_openConfig</value>
+  <data name="&gt;&gt;stripMenuItem_excecute.Name" xml:space="preserve">
+    <value>stripMenuItem_excecute</value>
   </data>
-  <data name="&gt;&gt;menuItem_openConfig.Type" xml:space="preserve">
+  <data name="&gt;&gt;stripMenuItem_excecute.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;stripMenuItem_forbid.Name" xml:space="preserve">
+    <value>stripMenuItem_forbid</value>
+  </data>
+  <data name="&gt;&gt;stripMenuItem_forbid.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

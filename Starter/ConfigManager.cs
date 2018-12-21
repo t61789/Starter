@@ -76,6 +76,15 @@ namespace Starter
             form_main.mainForm.selector.RefreshStartFiles();
         }
 
+        public void ForbidCommand(Command command)
+        {
+            XElement newEle = new XElement("command");
+            newEle.Add(new XElement("name",command.Name));
+            newEle.Add(new XElement("param", command.Param));
+            doc.Root.Element("forbid-commands").Add(newEle);
+            form_main.mainForm.RefreshCommand();
+        }
+
         private void CreateConfigFile()
         {
             doc = new XDocument();
@@ -84,6 +93,7 @@ namespace Starter
             temp.Add(new XElement("default"));
             temp.Add(new XElement("start"));
             doc.Root.Add(temp);
+            doc.Root.Add(new XElement("forbid-commands"));
             doc.Root.Add(new XElement("record-number"));
             doc.Root.Add(new XElement("directories"));
             temp = new XElement("ipconfig");

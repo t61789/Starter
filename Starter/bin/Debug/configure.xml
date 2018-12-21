@@ -2,8 +2,20 @@
 <root>
   <pre-commands>
     <default />
-    <start />
+    <start>
+      <command>
+        <name>start TIM</name>
+        <param>C:\Users\HASEE\Desktop\Programs\TIM.lnk</param>
+        <date>2018-12-21-16-42-05-3990</date>
+      </command>
+    </start>
   </pre-commands>
+  <forbid-commands>
+    <command>
+      <name>start YouDao</name>
+      <param>C:\Users\HASEE\Desktop\Programs\YouDao.lnk</param>
+    </command>
+  </forbid-commands>
   <record-number />
   <directories>
     <directory>C:\Users\HASEE\Desktop\Games</directory>
